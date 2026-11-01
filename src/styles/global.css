@@ -1,0 +1,186 @@
+:root {
+  --colore-testo: #1d2a30;
+  --colore-tenue: #4a5a62;
+  --colore-sfondo: #fbfaf7;
+  --colore-superficie: #ffffff;
+  --colore-accento: #1f5f7a;
+  --colore-bordo: #d9dfe2;
+  --colore-avviso: #fff4d6;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --larghezza: 64rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--colore-testo);
+  background: var(--colore-sfondo);
+}
+
+a {
+  color: var(--colore-accento);
+}
+
+a:focus-visible {
+  outline: 3px solid var(--colore-accento);
+  outline-offset: 2px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+}
+
+.contenitore {
+  max-width: var(--larghezza);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.salta {
+  position: absolute;
+  left: -999px;
+}
+
+.salta:focus {
+  left: 1rem;
+  top: 1rem;
+  background: var(--colore-superficie);
+  padding: 0.5rem 1rem;
+  z-index: 1;
+}
+
+.testata {
+  background: var(--colore-superficie);
+  border-bottom: 1px solid var(--colore-bordo);
+}
+
+.testata__riga {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.marchio {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.marchio__nome {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.marchio__sottotitolo {
+  color: var(--colore-tenue);
+  font-size: 0.95rem;
+}
+
+.lingue ul,
+.menu ul {
+  list-style: none;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+}
+
+.lingue ul {
+  padding: 0;
+  font-size: 0.95rem;
+}
+
+.menu ul {
+  padding-top: 0.5rem;
+  padding-bottom: 0.75rem;
+}
+
+.menu a,
+.lingue a {
+  text-decoration: none;
+  padding: 0.25rem 0;
+}
+
+[aria-current] {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+main {
+  padding-top: 1.5rem;
+  padding-bottom: 3rem;
+}
+
+.avviso {
+  background: var(--colore-avviso);
+  border-left: 4px solid #b8860b;
+  padding: 0.75rem 1rem;
+  margin: 0 0 1.5rem;
+}
+
+.griglia {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.scheda {
+  background: var(--colore-superficie);
+  border: 1px solid var(--colore-bordo);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.scheda__corpo {
+  padding: 1rem;
+}
+
+.scheda h2 {
+  margin-top: 0;
+}
+
+.dettagli {
+  color: var(--colore-tenue);
+}
+
+.tabella {
+  border-collapse: collapse;
+}
+
+.tabella th,
+.tabella td {
+  text-align: left;
+  padding: 0.4rem 1.5rem 0.4rem 0;
+  border-bottom: 1px solid var(--colore-bordo);
+}
+
+.piede {
+  border-top: 1px solid var(--colore-bordo);
+  background: var(--colore-superficie);
+  padding: 1rem 0;
+  font-size: 0.95rem;
+}

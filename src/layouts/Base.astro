@@ -1,0 +1,78 @@
+---
+import { getCollection } from "astro:content";
+import T from "../components/T.astro";
+import { traduci, LINGUE, NOMI_LINGUE, PAGINE, parola, url, type Lingua, type Pagina } from "../i18n/index.ts";
+import "../styles/global.css";
+
+interface Props {
+  lingua: Lingua;
+  pagina: Pagina;
+  titolo?: string;
+}
+
+const { lingua, pagina, titolo } = Astro.props;
+const [{ data: sito }] = await getCollection("sito");
+const titoloPagina = titolo ? `${titolo} — ${sito.nome}` : sito.nome;
+const descrizione = traduci(sito.sottotitolo, lingua).testo;
+---
+
+<!doctype html>
+<html lang={lingua}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titoloPagina}</title>
+    <meta name="description" content={descrizione} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {LINGUE.map((l) => <link rel="alternate" hreflang={l} href={new URL(url(pagina, l), Astro.site)} />)}
+  </head>
+  <body>
+    <a class="salta" href="#contenuto">{parola("vai_al_contenuto", lingua)}</a>
+    <header class="testata">
+      <div class="contenitore testata__riga">
+        <a class="marchio" href={url("home", lingua)}>
+          <span class="marchio__nome">{sito.nome}</span>
+          <span class="marchio__sottotitolo"><T t={sito.sottotitolo} lingua={lingua} /></span>
+        </a>
+        <nav aria-label={parola("lingua", lingua)} class="lingue">
+          <ul>
+            {
+              LINGUE.map((l) => (
+                <li>
+                  <a href={url(pagina, l)} hreflang={l} lang={l} aria-current={l === lingua ? "true" : undefined}>
+                    {NOMI_LINGUE[l]}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+      <nav aria-label={parola("menu", lingua)} class="menu">
+        <ul class="contenitore">
+          {
+            PAGINE.map((p) => (
+              <li>
+                <a href={url(p, lingua)} aria-current={p === pagina ? "page" : undefined}>
+                  {parola(p, lingua)}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </header>
+    <main id="contenuto" class="contenitore">
+      <slot />
+    </main>
+    <footer class="piede">
+      <div class="contenitore">
+        <p><strong>{sito.nome}</strong> · {sito.indirizzo}</p>
+        <p>
+          <a href={`tel:${sito.telefono.replaceAll(" ", "")}`}>{sito.telefono}</a> ·
+          <a href={`mailto:${sito.email}`}>{sito.email}</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

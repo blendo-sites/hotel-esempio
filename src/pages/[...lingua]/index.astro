@@ -1,0 +1,25 @@
+---
+import { getCollection } from "astro:content";
+import T from "../../components/T.astro";
+import { percorsiLingue, type Lingua } from "../../i18n/index.ts";
+import Base from "../../layouts/Base.astro";
+
+export const getStaticPaths = percorsiLingue;
+
+const { lingua } = Astro.props as { lingua: Lingua };
+const [{ data: benvenuto }] = await getCollection("home_benvenuto");
+const [{ data: avviso }] = await getCollection("home_avviso");
+---
+
+<Base lingua={lingua} pagina="home">
+  {
+    avviso.attivo && (
+      <p class="avviso">
+        <T t={avviso.testo} lingua={lingua} />
+      </p>
+    )
+  }
+  <h1><T t={benvenuto.titolo} lingua={lingua} /></h1>
+  <p><T t={benvenuto.testo} lingua={lingua} /></p>
+  {benvenuto.foto && <img src={benvenuto.foto} alt="" width="800" height="400" />}
+</Base>

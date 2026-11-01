@@ -1,0 +1,21 @@
+{
+  "nome": {
+    "it": "Family room",
+    "en": "Family room",
+    "de": "Familienzimmer"
+  },
+  "descrizione": {
+    "it": "Due ambienti comunicanti, fino a 4 persone.",
+    "en": "Two connecting rooms, for up to 4 people.",
+    "de": "Zwei verbundene Räume für bis zu 4 Personen."
+  },
+  "metri_quadri": 34,
+  "ospiti": 4,
+  "prezzo_da": 180,
+  "servizi": [
+    { "it": "Due ambienti", "en": "Two rooms", "de": "Zwei Räume" },
+    { "it": "Colazione inclusa", "en": "Breakfast included", "de": "Frühstück inbegriffen" }
+  ],
+  "foto": "/foto/segnaposto-camera.svg",
+  "ordine": 2
+}

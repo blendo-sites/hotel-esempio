@@ -1,0 +1,748 @@
+{
+  "collezioni": {
+    "camere": {
+      "file": "content/camere/*.json",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "descrizione": {
+            "additionalProperties": false,
+            "description": "Testo in italiano (obbligatorio), inglese e tedesco (facoltativi).",
+            "properties": {
+              "de": {
+                "maxLength": 600,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "en": {
+                "maxLength": 600,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "it": {
+                "maxLength": 600,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              }
+            },
+            "required": [
+              "it"
+            ],
+            "type": "object"
+          },
+          "foto": {
+            "description": "Percorso della foto, per esempio /foto/camera-doppia.jpg.",
+            "pattern": "^\\/foto\\/[a-z0-9-]+\\.(jpg|png|webp|svg)$",
+            "type": "string"
+          },
+          "metri_quadri": {
+            "description": "Superficie in metri quadri.",
+            "maximum": 500,
+            "minimum": 5,
+            "type": "integer"
+          },
+          "nome": {
+            "additionalProperties": false,
+            "description": "Testo in italiano (obbligatorio), inglese e tedesco (facoltativi).",
+            "properties": {
+              "de": {
+                "maxLength": 60,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "en": {
+                "maxLength": 60,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "it": {
+                "maxLength": 60,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              }
+            },
+            "required": [
+              "it"
+            ],
+            "type": "object"
+          },
+          "ordine": {
+            "description": "Posizione nell'elenco: prima i numeri bassi.",
+            "maximum": 999,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "ospiti": {
+            "description": "Numero massimo di ospiti.",
+            "maximum": 12,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "prezzo_da": {
+            "description": "Prezzo a notte a partire da, in euro.",
+            "maximum": 100000,
+            "minimum": 0,
+            "type": "number"
+          },
+          "servizi": {
+            "items": {
+              "additionalProperties": false,
+              "description": "Testo in italiano (obbligatorio), inglese e tedesco (facoltativi).",
+              "properties": {
+                "de": {
+                  "maxLength": 60,
+                  "minLength": 1,
+                  "pattern": "\\S",
+                  "type": "string"
+                },
+                "en": {
+                  "maxLength": 60,
+                  "minLength": 1,
+                  "pattern": "\\S",
+                  "type": "string"
+                },
+                "it": {
+                  "maxLength": 60,
+                  "minLength": 1,
+                  "pattern": "\\S",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "it"
+              ],
+              "type": "object"
+            },
+            "maxItems": 12,
+            "type": "array"
+          }
+        },
+        "required": [
+          "nome",
+          "descrizione",
+          "metri_quadri",
+          "ospiti",
+          "prezzo_da",
+          "servizi",
+          "ordine"
+        ],
+        "type": "object"
+      }
+    },
+    "contatti_come_arrivare": {
+      "file": "content/contatti/come-arrivare.json",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "testo": {
+            "additionalProperties": false,
+            "description": "Testo in italiano (obbligatorio), inglese e tedesco (facoltativi).",
+            "properties": {
+              "de": {
+                "maxLength": 800,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "en": {
+                "maxLength": 800,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "it": {
+                "maxLength": 800,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              }
+            },
+            "required": [
+              "it"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "testo"
+        ],
+        "type": "object"
+      }
+    },
+    "home_avviso": {
+      "file": "content/home/avviso.json",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "attivo": {
+            "description": "Se vero, l'avviso compare in cima alla home.",
+            "type": "boolean"
+          },
+          "testo": {
+            "additionalProperties": false,
+            "description": "Testo in italiano (obbligatorio), inglese e tedesco (facoltativi).",
+            "properties": {
+              "de": {
+                "maxLength": 200,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "en": {
+                "maxLength": 200,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "it": {
+                "maxLength": 200,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              }
+            },
+            "required": [
+              "it"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "attivo",
+          "testo"
+        ],
+        "type": "object"
+      }
+    },
+    "home_benvenuto": {
+      "file": "content/home/benvenuto.json",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "foto": {
+            "description": "Percorso della foto, per esempio /foto/camera-doppia.jpg.",
+            "pattern": "^\\/foto\\/[a-z0-9-]+\\.(jpg|png|webp|svg)$",
+            "type": "string"
+          },
+          "testo": {
+            "additionalProperties": false,
+            "description": "Testo in italiano (obbligatorio), inglese e tedesco (facoltativi).",
+            "properties": {
+              "de": {
+                "maxLength": 600,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "en": {
+                "maxLength": 600,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "it": {
+                "maxLength": 600,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              }
+            },
+            "required": [
+              "it"
+            ],
+            "type": "object"
+          },
+          "titolo": {
+            "additionalProperties": false,
+            "description": "Testo in italiano (obbligatorio), inglese e tedesco (facoltativi).",
+            "properties": {
+              "de": {
+                "maxLength": 80,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "en": {
+                "maxLength": 80,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "it": {
+                "maxLength": 80,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              }
+            },
+            "required": [
+              "it"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "titolo",
+          "testo"
+        ],
+        "type": "object"
+      }
+    },
+    "piscina_orari": {
+      "file": "content/piscina/orari.json",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "apertura": {
+            "description": "Ora nel formato HH:MM, per esempio 09:30.",
+            "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+            "type": "string"
+          },
+          "chiusura": {
+            "description": "Ora nel formato HH:MM, per esempio 09:30.",
+            "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+            "type": "string"
+          },
+          "stagione": {
+            "additionalProperties": false,
+            "description": "Testo in italiano (obbligatorio), inglese e tedesco (facoltativi).",
+            "properties": {
+              "de": {
+                "maxLength": 120,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "en": {
+                "maxLength": 120,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "it": {
+                "maxLength": 120,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              }
+            },
+            "required": [
+              "it"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "apertura",
+          "chiusura",
+          "stagione"
+        ],
+        "type": "object"
+      }
+    },
+    "piscina_presentazione": {
+      "file": "content/piscina/presentazione.json",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "testo": {
+            "additionalProperties": false,
+            "description": "Testo in italiano (obbligatorio), inglese e tedesco (facoltativi).",
+            "properties": {
+              "de": {
+                "maxLength": 800,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "en": {
+                "maxLength": 800,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "it": {
+                "maxLength": 800,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              }
+            },
+            "required": [
+              "it"
+            ],
+            "type": "object"
+          },
+          "titolo": {
+            "additionalProperties": false,
+            "description": "Testo in italiano (obbligatorio), inglese e tedesco (facoltativi).",
+            "properties": {
+              "de": {
+                "maxLength": 80,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "en": {
+                "maxLength": 80,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "it": {
+                "maxLength": 80,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              }
+            },
+            "required": [
+              "it"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "titolo",
+          "testo"
+        ],
+        "type": "object"
+      }
+    },
+    "ristorante_menu": {
+      "file": "content/ristorante/menu-del-giorno.json",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "dolce": {
+            "additionalProperties": false,
+            "description": "Testo in italiano (obbligatorio), inglese e tedesco (facoltativi).",
+            "properties": {
+              "de": {
+                "maxLength": 120,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "en": {
+                "maxLength": 120,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "it": {
+                "maxLength": 120,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              }
+            },
+            "required": [
+              "it"
+            ],
+            "type": "object"
+          },
+          "prezzo": {
+            "description": "Prezzo del menù completo, in euro.",
+            "maximum": 100000,
+            "minimum": 0,
+            "type": "number"
+          },
+          "primo": {
+            "additionalProperties": false,
+            "description": "Testo in italiano (obbligatorio), inglese e tedesco (facoltativi).",
+            "properties": {
+              "de": {
+                "maxLength": 120,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "en": {
+                "maxLength": 120,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "it": {
+                "maxLength": 120,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              }
+            },
+            "required": [
+              "it"
+            ],
+            "type": "object"
+          },
+          "secondo": {
+            "additionalProperties": false,
+            "description": "Testo in italiano (obbligatorio), inglese e tedesco (facoltativi).",
+            "properties": {
+              "de": {
+                "maxLength": 120,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "en": {
+                "maxLength": 120,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "it": {
+                "maxLength": 120,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              }
+            },
+            "required": [
+              "it"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "primo",
+          "secondo",
+          "dolce",
+          "prezzo"
+        ],
+        "type": "object"
+      }
+    },
+    "ristorante_orari": {
+      "file": "content/ristorante/orari.json",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "cena": {
+            "additionalProperties": false,
+            "properties": {
+              "apertura": {
+                "description": "Ora nel formato HH:MM, per esempio 09:30.",
+                "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+                "type": "string"
+              },
+              "chiusura": {
+                "description": "Ora nel formato HH:MM, per esempio 09:30.",
+                "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "apertura",
+              "chiusura"
+            ],
+            "type": "object"
+          },
+          "chiusura_settimanale": {
+            "additionalProperties": false,
+            "description": "Testo in italiano (obbligatorio), inglese e tedesco (facoltativi).",
+            "properties": {
+              "de": {
+                "maxLength": 80,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "en": {
+                "maxLength": 80,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "it": {
+                "maxLength": 80,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              }
+            },
+            "required": [
+              "it"
+            ],
+            "type": "object"
+          },
+          "pranzo": {
+            "additionalProperties": false,
+            "properties": {
+              "apertura": {
+                "description": "Ora nel formato HH:MM, per esempio 09:30.",
+                "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+                "type": "string"
+              },
+              "chiusura": {
+                "description": "Ora nel formato HH:MM, per esempio 09:30.",
+                "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "apertura",
+              "chiusura"
+            ],
+            "type": "object"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "ristorante_presentazione": {
+      "file": "content/ristorante/presentazione.json",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "testo": {
+            "additionalProperties": false,
+            "description": "Testo in italiano (obbligatorio), inglese e tedesco (facoltativi).",
+            "properties": {
+              "de": {
+                "maxLength": 800,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "en": {
+                "maxLength": 800,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "it": {
+                "maxLength": 800,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              }
+            },
+            "required": [
+              "it"
+            ],
+            "type": "object"
+          },
+          "titolo": {
+            "additionalProperties": false,
+            "description": "Testo in italiano (obbligatorio), inglese e tedesco (facoltativi).",
+            "properties": {
+              "de": {
+                "maxLength": 80,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "en": {
+                "maxLength": 80,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "it": {
+                "maxLength": 80,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              }
+            },
+            "required": [
+              "it"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "titolo",
+          "testo"
+        ],
+        "type": "object"
+      }
+    },
+    "sito": {
+      "file": "content/sito.json",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "description": "Indirizzo email per i contatti.",
+            "format": "email",
+            "pattern": "^(?:[A-Za-z0-9_'+\\-]+\\.)*[A-Za-z0-9_'+\\-]*[A-Za-z0-9_+-]@(?:[A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$",
+            "type": "string"
+          },
+          "indirizzo": {
+            "description": "Indirizzo completo.",
+            "maxLength": 160,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "nome": {
+            "description": "Nome della struttura.",
+            "maxLength": 80,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "sottotitolo": {
+            "additionalProperties": false,
+            "description": "Testo in italiano (obbligatorio), inglese e tedesco (facoltativi).",
+            "properties": {
+              "de": {
+                "maxLength": 120,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "en": {
+                "maxLength": 120,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "it": {
+                "maxLength": 120,
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              }
+            },
+            "required": [
+              "it"
+            ],
+            "type": "object"
+          },
+          "telefono": {
+            "description": "Numero di telefono, per esempio +39 045 000 0000.",
+            "pattern": "^\\+?[0-9 ]{6,20}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "nome",
+          "sottotitolo",
+          "telefono",
+          "email",
+          "indirizzo"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "versione": 1
+}

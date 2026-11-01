@@ -1,0 +1,9 @@
+{
+  "apertura": "09:00",
+  "chiusura": "19:00",
+  "stagione": {
+    "it": "Da maggio a settembre",
+    "en": "From May to September",
+    "de": "Von Mai bis September"
+  }
+}

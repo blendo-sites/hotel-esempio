@@ -1,0 +1,16 @@
+---
+// A localized text. When the translation is missing the Italian text is
+// shown, marked with `lang="it"` so screen readers read it correctly.
+import { traduci, type Lingua } from "../i18n/index.ts";
+import type { Testo } from "../schemas/comuni.ts";
+
+interface Props {
+  t: Testo;
+  lingua: Lingua;
+}
+
+const { t, lingua } = Astro.props;
+const { testo, lingua: mostrata } = traduci(t, lingua);
+---
+
+{mostrata === lingua ? testo : <span lang={mostrata}>{testo}</span>}

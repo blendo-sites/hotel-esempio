@@ -1,0 +1,62 @@
+---
+import { getCollection } from "astro:content";
+import T from "../../components/T.astro";
+import { parola, percorsiLingue, prezzoInEuro, type Lingua } from "../../i18n/index.ts";
+import Base from "../../layouts/Base.astro";
+
+export const getStaticPaths = percorsiLingue;
+
+const { lingua } = Astro.props as { lingua: Lingua };
+const [{ data: presentazione }] = await getCollection("ristorante_presentazione");
+const [{ data: menu }] = await getCollection("ristorante_menu");
+const [{ data: orari }] = await getCollection("ristorante_orari");
+const portate = ["primo", "secondo", "dolce"] as const;
+const fasce = (["pranzo", "cena"] as const).filter((f) => orari[f]);
+---
+
+<Base lingua={lingua} pagina="ristorante" titolo={parola("ristorante", lingua)}>
+  <h1><T t={presentazione.titolo} lingua={lingua} /></h1>
+  <p><T t={presentazione.testo} lingua={lingua} /></p>
+
+  <h2>{parola("menu_del_giorno", lingua)}</h2>
+  <dl>
+    {
+      portate.map((p) => (
+        <>
+          <dt>{parola(p, lingua)}</dt>
+          <dd>
+            <T t={menu[p]} lingua={lingua} />
+          </dd>
+        </>
+      ))
+    }
+    <dt>{parola("prezzo", lingua)}</dt>
+    <dd>{prezzoInEuro(menu.prezzo, lingua)}</dd>
+  </dl>
+
+  <h2>{parola("orari", lingua)}</h2>
+  <table class="tabella">
+    <tbody>
+      {
+        fasce.map((f) => (
+          <tr>
+            <th scope="row">{parola(f, lingua)}</th>
+            <td>
+              {orari[f]!.apertura}–{orari[f]!.chiusura}
+            </td>
+          </tr>
+        ))
+      }
+      {
+        orari.chiusura_settimanale && (
+          <tr>
+            <th scope="row">{parola("chiuso", lingua)}</th>
+            <td>
+              <T t={orari.chiusura_settimanale} lingua={lingua} />
+            </td>
+          </tr>
+        )
+      }
+    </tbody>
+  </table>
+</Base>

@@ -1,0 +1,22 @@
+{
+  "nome": {
+    "it": "Doppia vista lago",
+    "en": "Double room, lake view",
+    "de": "Doppelzimmer mit Seeblick"
+  },
+  "descrizione": {
+    "it": "Camera di 22 m² con balcone affacciato sul lago.",
+    "en": "A 22 m² room with a balcony overlooking the lake.",
+    "de": "22 m² großes Zimmer mit Balkon und Blick auf den See."
+  },
+  "metri_quadri": 22,
+  "ospiti": 2,
+  "prezzo_da": 120,
+  "servizi": [
+    { "it": "Balcone", "en": "Balcony", "de": "Balkon" },
+    { "it": "Aria condizionata", "en": "Air conditioning", "de": "Klimaanlage" },
+    { "it": "Colazione inclusa", "en": "Breakfast included", "de": "Frühstück inbegriffen" }
+  ],
+  "foto": "/foto/segnaposto-camera.svg",
+  "ordine": 1
+}

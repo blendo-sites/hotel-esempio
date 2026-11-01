@@ -1,0 +1,11 @@
+{
+  "nome": "Hotel Esempio",
+  "sottotitolo": {
+    "it": "Hotel a conduzione familiare sul Lago di Garda",
+    "en": "Family-run hotel on Lake Garda",
+    "de": "Familiengeführtes Hotel am Gardasee"
+  },
+  "telefono": "+39 045 000 0000",
+  "email": "info@hotel-esempio.it",
+  "indirizzo": "Via del Lago 1, 37010 Garda (VR)"
+}

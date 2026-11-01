@@ -1,0 +1,82 @@
+# Regole del sito, lette dal gateway Blendo a ogni richiesta (da main).
+# Fa parte della struttura: lo modifica solo Blendo.
+sito: hotel-esempio
+schema: schema.json
+lingue: [it, en, de]
+
+media:
+  formati: [jpg, png, webp]
+  max_mb: 10
+
+livelli:
+  contenuti:
+    modificabile:
+      - content/**/*.json
+  struttura:
+    modificabile:
+      - "**"
+    approvazione_extra:
+      - blendo.yml
+      - .github/**
+    review: obbligatoria
+
+controlli:
+  peso_pagina_kb: 600
+
+# Mappa delle pagine per l'assistente: ogni sezione indica il file
+# (o il gruppo di file) da modificare, con un nome comprensibile.
+pagine:
+  - id: home
+    titolo: Home
+    percorso: /
+    sezioni:
+      - id: benvenuto
+        nome: Messaggio di benvenuto
+        file: content/home/benvenuto.json
+      - id: avviso
+        nome: Avviso in evidenza
+        file: content/home/avviso.json
+
+  - id: camere
+    titolo: Camere
+    percorso: /camere
+    sezioni:
+      - id: camere
+        nome: Camere (una scheda per camera)
+        file: content/camere/*.json
+
+  - id: ristorante
+    titolo: Ristorante
+    percorso: /ristorante
+    sezioni:
+      - id: presentazione-ristorante
+        nome: Presentazione del ristorante
+        file: content/ristorante/presentazione.json
+      - id: menu-del-giorno
+        nome: Menù del giorno
+        file: content/ristorante/menu-del-giorno.json
+      - id: orari-ristorante
+        nome: Orari del ristorante
+        file: content/ristorante/orari.json
+
+  - id: piscina
+    titolo: Piscina
+    percorso: /piscina
+    sezioni:
+      - id: presentazione-piscina
+        nome: Presentazione della piscina
+        file: content/piscina/presentazione.json
+      - id: orari-piscina
+        nome: Orari e stagione della piscina
+        file: content/piscina/orari.json
+
+  - id: contatti
+    titolo: Contatti
+    percorso: /contatti
+    sezioni:
+      - id: recapiti
+        nome: Nome della struttura e recapiti (compaiono anche in fondo a ogni pagina)
+        file: content/sito.json
+      - id: come-arrivare
+        nome: Come arrivare
+        file: content/contatti/come-arrivare.json

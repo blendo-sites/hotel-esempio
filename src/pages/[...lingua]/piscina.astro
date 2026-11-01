@@ -1,0 +1,21 @@
+---
+import { getCollection } from "astro:content";
+import T from "../../components/T.astro";
+import { parola, percorsiLingue, type Lingua } from "../../i18n/index.ts";
+import Base from "../../layouts/Base.astro";
+
+export const getStaticPaths = percorsiLingue;
+
+const { lingua } = Astro.props as { lingua: Lingua };
+const [{ data: presentazione }] = await getCollection("piscina_presentazione");
+const [{ data: orari }] = await getCollection("piscina_orari");
+---
+
+<Base lingua={lingua} pagina="piscina" titolo={parola("piscina", lingua)}>
+  <h1><T t={presentazione.titolo} lingua={lingua} /></h1>
+  <p><T t={presentazione.testo} lingua={lingua} /></p>
+
+  <h2>{parola("orari", lingua)}</h2>
+  <p>{orari.apertura}–{orari.chiusura}</p>
+  <p><T t={orari.stagione} lingua={lingua} /></p>
+</Base>

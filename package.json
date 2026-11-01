@@ -1,0 +1,35 @@
+{
+  "name": "sito-blendo",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "schema": "node scripts/export-schema.ts",
+    "prebuild": "npm run schema",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check:content": "node scripts/check-content.ts",
+    "check:weight": "node scripts/check-weight.ts",
+    "check:a11y": "node scripts/check-a11y.ts",
+    "check:links": "linkinator dist",
+    "test": "node --test \"tests/**/*.test.ts\""
+  },
+  "dependencies": {
+    "astro": "7.4.4",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "@types/node": "24.19.2",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "linkinator": "8.1.0",
+    "pa11y-ci": "5.0.0",
+    "typescript": "6.0.3",
+    "yaml": "2.9.1"
+  }
+}

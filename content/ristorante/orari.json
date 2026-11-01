@@ -1,0 +1,5 @@
+{
+  "pranzo": { "apertura": "12:30", "chiusura": "14:00" },
+  "cena": { "apertura": "19:30", "chiusura": "21:30" },
+  "chiusura_settimanale": { "it": "Lunedì a pranzo", "en": "Monday lunch", "de": "Montagmittag" }
+}

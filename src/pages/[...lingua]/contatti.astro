@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import T from "../../components/T.astro";
+import { parola, percorsiLingue, type Lingua } from "../../i18n/index.ts";
+import Base from "../../layouts/Base.astro";
+
+export const getStaticPaths = percorsiLingue;
+
+const { lingua } = Astro.props as { lingua: Lingua };
+const [{ data: sito }] = await getCollection("sito");
+const [{ data: comeArrivare }] = await getCollection("contatti_come_arrivare");
+---
+
+<Base lingua={lingua} pagina="contatti" titolo={parola("contatti", lingua)}>
+  <h1>{parola("contatti", lingua)}</h1>
+
+  <h2>{parola("recapiti", lingua)}</h2>
+  <dl>
+    <dt>{parola("telefono", lingua)}</dt>
+    <dd><a href={`tel:${sito.telefono.replaceAll(" ", "")}`}>{sito.telefono}</a></dd>
+    <dt>{parola("email", lingua)}</dt>
+    <dd><a href={`mailto:${sito.email}`}>{sito.email}</a></dd>
+    <dt>{parola("indirizzo", lingua)}</dt>
+    <dd>{sito.indirizzo}</dd>
+  </dl>
+
+  <h2>{parola("come_arrivare", lingua)}</h2>
+  <p><T t={comeArrivare.testo} lingua={lingua} /></p>
+</Base>

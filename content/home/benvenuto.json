@@ -1,0 +1,13 @@
+{
+  "titolo": {
+    "it": "Benvenuti all'Hotel Esempio",
+    "en": "Welcome to Hotel Esempio",
+    "de": "Willkommen im Hotel Esempio"
+  },
+  "testo": {
+    "it": "Un hotel a conduzione familiare a pochi passi dal lago, con piscina, ristorante e camere vista lago.",
+    "en": "A family-run hotel a short walk from the lake, with a swimming pool, a restaurant and lake-view rooms.",
+    "de": "Ein familiengeführtes Hotel wenige Schritte vom See, mit Schwimmbad, Restaurant und Zimmern mit Seeblick."
+  },
+  "foto": "/foto/segnaposto-lago.svg"
+}

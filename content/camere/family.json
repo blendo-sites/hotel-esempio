@@ -13,9 +13,18 @@
   "ospiti": 4,
   "prezzo_da": 180,
   "servizi": [
-    { "it": "Due ambienti", "en": "Two rooms", "de": "Zwei Räume" },
-    { "it": "Colazione inclusa", "en": "Breakfast included", "de": "Frühstück inbegriffen" }
+    {
+      "it": "Due ambienti",
+      "en": "Two rooms",
+      "de": "Zwei Räume"
+    },
+    {
+      "it": "Colazione inclusa",
+      "en": "Breakfast included",
+      "de": "Frühstück inbegriffen"
+    }
   ],
   "foto": "/foto/segnaposto-camera.svg",
-  "ordine": 2
+  "ordine": 2,
+  "piscina_privata": true
 }

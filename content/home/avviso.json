@@ -1,8 +1,9 @@
 {
   "attivo": true,
   "testo": {
-    "it": "Prova dell'App contenuti del 2026-11-01 15:45 UTC.",
+    "it": "Prova dell'App contenuti del 2026-11-01 15:47 UTC.",
     "en": "Open for the season from 1 April to 2 November.",
     "de": "Saisonal geöffnet vom 1. April bis 2. November."
-  }
+  },
+  "chiave_sconosciuta": true
 }

@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import Foto from "../../components/Foto.astro";
 import T from "../../components/T.astro";
 import { percorsiLingue, type Lingua } from "../../i18n/index.ts";
 import Base from "../../layouts/Base.astro";
@@ -21,5 +22,9 @@ const [{ data: avviso }] = await getCollection("home_avviso");
   }
   <h1><T t={benvenuto.titolo} lingua={lingua} /></h1>
   <p><T t={benvenuto.testo} lingua={lingua} /></p>
-  {benvenuto.foto && <img src={benvenuto.foto} alt="" width="800" height="400" />}
+  {
+    benvenuto.foto && (
+      <Foto foto={benvenuto.foto} lingua={lingua} larghezze={[480, 800, 1200]} sizes="(min-width: 64rem) 64rem, 100vw" loading="eager" />
+    )
+  }
 </Base>

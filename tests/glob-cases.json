@@ -1,0 +1,19 @@
+[
+  { "pattern": "content/camere/*.json", "path": "content/camere/family.json", "match": true },
+  { "pattern": "content/camere/*.json", "path": "content/camere/sub/family.json", "match": false },
+  { "pattern": "content/camere/*.json", "path": "content/camere.json", "match": false },
+  { "pattern": "content/**/*.json", "path": "content/sito.json", "match": true },
+  { "pattern": "content/**/*.json", "path": "content/a/b/c.json", "match": true },
+  { "pattern": "content/**/*.json", "path": "contentx/a.json", "match": false },
+  { "pattern": ".github/**", "path": ".github/workflows/controlli.yml", "match": true },
+  { "pattern": ".github/**", "path": ".github", "match": false },
+  { "pattern": "**", "path": "src/pages/index.astro", "match": true },
+  { "pattern": "content/*.json", "path": "content/sito.jsonx", "match": false },
+  { "pattern": "content/?.json", "path": "content/a.json", "match": true },
+  { "pattern": "content/?.json", "path": "content/ab.json", "match": false },
+  { "pattern": "content/?.json", "path": "content//.json", "match": false },
+  { "pattern": "blendo.yml", "path": "blendo.yml", "match": true },
+  { "pattern": "blendo.yml", "path": "blendoxyml", "match": false },
+  { "pattern": "content/(a)+.json", "path": "content/(a)+.json", "match": true },
+  { "pattern": "content/(a)+.json", "path": "content/aa.json", "match": false }
+]

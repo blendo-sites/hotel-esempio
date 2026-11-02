@@ -5,8 +5,10 @@ schema: schema.json
 lingue: [it, en, de]
 
 media:
-  formati: [jpg, png, webp]
+  formati: [jpg, png, webp, heic]
   max_mb: 10
+  # Foto pronte per il sito. Qui scrive solo il gateway, mai l'assistente.
+  cartella: src/assets/foto
 
 livelli:
   contenuti:

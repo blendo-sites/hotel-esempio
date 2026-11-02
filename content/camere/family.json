@@ -16,6 +16,13 @@
     { "it": "Due ambienti", "en": "Two rooms", "de": "Zwei Räume" },
     { "it": "Colazione inclusa", "en": "Breakfast included", "de": "Frühstück inbegriffen" }
   ],
-  "foto": "/foto/segnaposto-camera.svg",
+  "foto": {
+    "media": "segnaposto-camera",
+    "alt": {
+      "it": "Disegno di una camera con un letto matrimoniale e due cuscini",
+      "en": "Drawing of a room with a double bed and two pillows",
+      "de": "Zeichnung eines Zimmers mit Doppelbett und zwei Kissen"
+    }
+  },
   "ordine": 2
 }

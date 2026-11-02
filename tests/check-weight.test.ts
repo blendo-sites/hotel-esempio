@@ -56,6 +56,17 @@ describe("check-weight", () => {
     assert.deepEqual(home?.risorse, ["/foto/grande.jpg", "/stile.css"]);
   });
 
+  test("of a srcset only the largest candidate counts", () => {
+    writeFileSync(join(dist, "foto", "piccola.webp"), Buffer.alloc(10 * 1024));
+    writeFileSync(join(dist, "foto", "media.webp"), Buffer.alloc(20 * 1024));
+    writeFileSync(
+      join(dist, "index.html"),
+      `<html><body><img src="/foto/piccola.webp" srcset="/foto/piccola.webp 400w, /foto/media.webp 800w" alt="Lago"></body></html>`,
+    );
+    const home = checkWeight(sito, dist).pesi.find((p) => p.pagina === "/index.html");
+    assert.deepEqual(home?.risorse, ["/foto/media.webp"]);
+  });
+
   test("rejects a page of the map that was not built", () => {
     rmSync(join(dist, "piscina"), { recursive: true });
     assert.deepEqual(

@@ -30,6 +30,7 @@ Gli stessi controlli girano in GitHub Actions (`.github/workflows/controlli.yml`
 blendo.yml              regole del sito e mappa delle pagine (letto dal gateway)
 schema.json             JSON Schema dei contenuti, generato: non modificarlo a mano
 content/                contenuti, un file JSON per sezione (le camere: un file per camera)
+src/assets/foto/        foto del sito, una per file: le scrive solo il gateway
 src/schemas/            schemi Zod dei contenuti e elenco delle collezioni
 src/content.config.ts   collezioni Astro, costruite dall'elenco di src/schemas/
 src/i18n/               lingue, voci di menu, testi fissi

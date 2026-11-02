@@ -3,12 +3,15 @@
 //
 // - `blendo.yml` is valid and its page map points at real files;
 // - every file in `content/` belongs to exactly one collection and to the map;
-// - every JSON file is valid against its collection in `schema.json`.
+// - every JSON file is valid against its collection in `schema.json`;
+// - every photo used in the content has its file in the media folder
+//   (files nobody uses are fine: a revert may need them).
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { Ajv2020, type ErrorObject, type ValidateFunction } from "ajv/dist/2020.js";
 import addFormatsModule from "ajv-formats";
 import { isPattern, matches } from "./lib/glob.ts";
+import { riferimentiMedia } from "./lib/media.ts";
 import { type Errore, leggiBlendoYml, leggiSchemaJson } from "./lib/sito.ts";
 
 // ajv-formats is CommonJS: depending on the loader the function is the
@@ -76,6 +79,7 @@ export function checkContent(radice: string): Errore[] {
   }
 
   const ajv = new Ajv2020({ allErrors: true, strict: true });
+  ajv.addKeyword("x-blendo");
   addFormats(ajv);
   const validatori = new Map<string, ValidateFunction>();
   for (const [nome, { schema: s }] of Object.entries(schema.collezioni)) {
@@ -158,6 +162,13 @@ export function checkContent(radice: string): Errore[] {
     const valida = validatori.get(proprie[0].nome);
     if (valida && !valida(dati)) {
       for (const e of valida.errors ?? []) errori.push({ file: f, messaggio: messaggio(e) });
+      continue;
+    }
+    const cartella = config.media.cartella;
+    for (const codice of riferimentiMedia(dati, schema.collezioni[proprie[0].nome].schema)) {
+      if (!existsSync(join(radice, cartella, `${codice}.webp`))) {
+        errori.push({ file: f, messaggio: `la foto «${codice}» non ha il suo file in ${cartella}` });
+      }
     }
   }
 

@@ -1,7 +1,8 @@
 // Page weight: for every HTML page in `dist/`, the size of the page plus the
 // local files it loads (styles, scripts, images, icons) must stay under
 // `controlli.peso_pagina_kb` of `blendo.yml`. Files are counted as built,
-// without compression, so the limit is on the safe side.
+// without compression, so the limit is on the safe side. Of a `srcset` the
+// browser downloads one candidate: the largest is the one counted.
 //
 // Also checks that every page of the map in `blendo.yml` has been built.
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
@@ -11,21 +12,27 @@ import { type Errore, leggiBlendoYml } from "./lib/sito.ts";
 export type PesoPagina = { pagina: string; byte: number; risorse: string[] };
 
 // Local resources loaded by the page itself; `<a href>` is a link, not a load.
-const RISORSE = [
-  /<(?:img|script|source|audio|video|iframe)\b[^>]*?\ssrc="([^"]+)"/g,
-  /<link\b[^>]*?\shref="([^"]+)"/g,
-  /\ssrcset="([^"]+)"/g,
-];
+const TAG = /<(img|script|source|audio|video|iframe|link)\b[^>]*>/g;
+
+function attributo(tag: string, nome: string): string | undefined {
+  return new RegExp(`\\s${nome}="([^"]+)"`).exec(tag)?.[1];
+}
+
+/** `/a.webp 480w, /b.webp 800w` → `/b.webp`. */
+function candidatoMaggiore(srcset: string): string {
+  const candidati = srcset.split(",").map((voce) => {
+    const [url, descrittore = "1x"] = voce.trim().split(/\s+/);
+    return { url, misura: Number.parseFloat(descrittore) };
+  });
+  return candidati.reduce((a, b) => (b.misura > a.misura ? b : a)).url;
+}
 
 function risorseLocali(html: string): string[] {
   const trovate = new Set<string>();
-  for (const re of RISORSE) {
-    for (const m of html.matchAll(re)) {
-      const valori = re.source.includes("srcset") ? m[1].split(",").map((s) => s.trim().split(/\s+/)[0]) : [m[1]];
-      for (const v of valori) {
-        if (v.startsWith("/") && !v.startsWith("//")) trovate.add(v.split(/[?#]/)[0]);
-      }
-    }
+  for (const [tag, nome] of html.matchAll(TAG)) {
+    const srcset = attributo(tag, "srcset");
+    const valore = srcset ? candidatoMaggiore(srcset) : attributo(tag, nome === "link" ? "href" : "src");
+    if (valore?.startsWith("/") && !valore.startsWith("//")) trovate.add(valore.split(/[?#]/)[0]);
   }
   return [...trovate].sort();
 }

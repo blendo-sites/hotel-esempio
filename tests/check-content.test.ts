@@ -106,6 +106,46 @@ describe("check-content", () => {
     assert.ok(errori.includes("blendo.yml: pagina «home», sezione «benvenuto»: src/pages/index.astro non è tra i file modificabili dei contenuti"));
   });
 
+  test("rejects a photo without its file", () => {
+    const camera = leggiJson(sito, "content/camere/family.json");
+    const foto = { media: "foto-000000000000", alt: { it: "Camera family" } };
+    scriviJson(sito, "content/camere/family.json", { ...camera, foto });
+    assert.deepEqual(messaggi(), [
+      "content/camere/family.json: la foto «foto-000000000000» non ha il suo file in src/assets/foto",
+    ]);
+  });
+
+  test("accepts photo files nobody uses", () => {
+    writeFileSync(join(sito, "src/assets/foto/foto-111111111111.webp"), "x");
+    assert.deepEqual(messaggi(), []);
+  });
+
+  test("rejects a photo without alternative text, or with an empty one", () => {
+    const camera = leggiJson(sito, "content/camere/family.json");
+    scriviJson(sito, "content/camere/family.json", { ...camera, foto: { media: "segnaposto-camera" } });
+    assert.deepEqual(messaggi(), ["content/camere/family.json: manca il campo «foto.alt»"]);
+
+    scriviJson(sito, "content/camere/family.json", {
+      ...camera,
+      foto: { media: "segnaposto-camera", alt: { it: " " } },
+    });
+    assert.deepEqual(messaggi(), ["content/camere/family.json: il campo «foto.alt.it» non è nel formato previsto"]);
+  });
+
+  test("rejects a photo code with a path inside", () => {
+    const camera = leggiJson(sito, "content/camere/family.json");
+    const foto = { media: "../../segreto", alt: { it: "Camera" } };
+    scriviJson(sito, "content/camere/family.json", { ...camera, foto });
+    assert.deepEqual(messaggi(), ["content/camere/family.json: il campo «foto.media» non è nel formato previsto"]);
+  });
+
+  test("rejects a media folder that is not a plain relative path", () => {
+    modificaBlendoYml(sito, (config) => {
+      config.media.cartella = "../fuori";
+    });
+    assert.ok(messaggi().some((e) => e.startsWith("blendo.yml: media.cartella")));
+  });
+
   test("rejects an invalid blendo.yml", () => {
     modificaBlendoYml(sito, (config) => {
       config.controlli.peso_pagina_kb = "tanto";

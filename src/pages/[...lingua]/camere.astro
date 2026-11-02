@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import Foto from "../../components/Foto.astro";
 import T from "../../components/T.astro";
 import { parola, percorsiLingue, prezzoInEuro, type Lingua } from "../../i18n/index.ts";
 import Base from "../../layouts/Base.astro";
@@ -16,7 +17,9 @@ const camere = (await getCollection("camere")).map((c) => c.data).sort((a, b) =>
     {
       camere.map((camera) => (
         <li class="scheda">
-          {camera.foto && <img src={camera.foto} alt="" width="600" height="400" loading="lazy" />}
+          {camera.foto && (
+            <Foto foto={camera.foto} lingua={lingua} larghezze={[400, 800]} sizes="(min-width: 48rem) 30rem, 100vw" />
+          )}
           <div class="scheda__corpo">
             <h2>
               <T t={camera.nome} lingua={lingua} />

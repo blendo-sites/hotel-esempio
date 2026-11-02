@@ -1,0 +1,31 @@
+---
+// A photo of the site: one committed file, resized at build time. The
+// alternative text is in the page's language, falling back to Italian.
+import { Image } from "astro:assets";
+import { traduci, type Lingua } from "../i18n/index.ts";
+import type { Foto } from "../schemas/comuni.ts";
+import { type ModuliFoto, trovaFoto } from "./foto.ts";
+
+interface Props {
+  foto: Foto;
+  lingua: Lingua;
+  /** Widths generated for `srcset`; the largest is what the weight check counts. */
+  larghezze: number[];
+  sizes: string;
+  loading?: "lazy" | "eager";
+}
+
+const { foto, lingua, larghezze, sizes, loading = "lazy" } = Astro.props;
+const moduli: ModuliFoto = import.meta.glob("/src/assets/foto/*.webp", { eager: true });
+const file = trovaFoto(moduli, foto.media);
+---
+
+<Image
+  src={file}
+  alt={traduci(foto.alt, lingua).testo}
+  layout="constrained"
+  width={Math.max(...larghezze)}
+  widths={larghezze}
+  sizes={sizes}
+  loading={loading}
+/>

@@ -8,7 +8,7 @@ export const RADICE = join(import.meta.dirname, "..");
 
 export function copiaSito(): string {
   const cartella = mkdtempSync(join(tmpdir(), "sito-"));
-  for (const voce of ["blendo.yml", "schema.json", "content"]) {
+  for (const voce of ["blendo.yml", "schema.json", "content", "src/assets/foto"]) {
     cpSync(join(RADICE, voce), join(cartella, voce), { recursive: true });
   }
   return cartella;

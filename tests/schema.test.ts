@@ -17,14 +17,15 @@ test("schema.json rejects unknown keys in every collection", () => {
   }
 });
 
+// The same cases run against the gateway's Python port (tests/test_glob.py).
+const casiGlob = JSON.parse(readFileSync(join(RADICE, "tests/glob-cases.json"), "utf8")) as {
+  pattern: string;
+  path: string;
+  match: boolean;
+}[];
+
 test("glob: * stays within a folder, ** crosses folders", () => {
-  assert.ok(matches("content/camere/*.json", "content/camere/family.json"));
-  assert.ok(!matches("content/camere/*.json", "content/camere/sub/family.json"));
-  assert.ok(!matches("content/camere/*.json", "content/camere.json"));
-  assert.ok(matches("content/**/*.json", "content/sito.json"));
-  assert.ok(matches("content/**/*.json", "content/a/b/c.json"));
-  assert.ok(!matches("content/**/*.json", "contentx/a.json"));
-  assert.ok(matches(".github/**", ".github/workflows/controlli.yml"));
-  assert.ok(matches("**", "src/pages/index.astro"));
-  assert.ok(!matches("content/*.json", "content/sito.jsonx"));
+  for (const c of casiGlob) {
+    assert.equal(matches(c.pattern, c.path), c.match, `${c.pattern} ~ ${c.path}`);
+  }
 });

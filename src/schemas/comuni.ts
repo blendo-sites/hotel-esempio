@@ -39,8 +39,17 @@ export const prezzo = z
   .max(100000)
   .meta({ description: "Prezzo in euro, solo il numero." });
 
-/** Path of a photo. The real photo reference format arrives with M3. */
-export const foto = z
-  .string()
-  .regex(/^\/foto\/[a-z0-9-]+\.(jpg|png|webp|svg)$/)
-  .meta({ description: "Percorso della foto, per esempio /foto/camera-doppia.jpg." });
+/**
+ * A photo: the code of a file in the media folder of `blendo.yml`, and its
+ * alternative text. `x-blendo` ends up in the JSON Schema: that is how the
+ * gateway and `check-content` recognize photo fields without running code.
+ */
+export const foto = z.strictObject({
+  media: z
+    .string()
+    .regex(/^[a-z0-9]+(-[a-z0-9]+)*$/)
+    .meta({ "x-blendo": "media", description: "Codice della foto, da carica_media." }),
+  alt: testo(150).meta({ description: "Cosa mostra la foto, per chi non la vede." }),
+});
+
+export type Foto = z.infer<typeof foto>;

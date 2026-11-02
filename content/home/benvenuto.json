@@ -9,5 +9,12 @@
     "en": "A family-run hotel a short walk from the lake, with a swimming pool, a restaurant and lake-view rooms.",
     "de": "Ein familiengeführtes Hotel wenige Schritte vom See, mit Schwimmbad, Restaurant und Zimmern mit Seeblick."
   },
-  "foto": "/foto/segnaposto-lago.svg"
+  "foto": {
+    "media": "segnaposto-lago",
+    "alt": {
+      "it": "Disegno di un lago con le montagne sullo sfondo",
+      "en": "Drawing of a lake with mountains in the background",
+      "de": "Zeichnung eines Sees mit Bergen im Hintergrund"
+    }
+  }
 }

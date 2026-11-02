@@ -35,9 +35,48 @@
             "type": "object"
           },
           "foto": {
-            "description": "Percorso della foto, per esempio /foto/camera-doppia.jpg.",
-            "pattern": "^\\/foto\\/[a-z0-9-]+\\.(jpg|png|webp|svg)$",
-            "type": "string"
+            "additionalProperties": false,
+            "properties": {
+              "alt": {
+                "additionalProperties": false,
+                "description": "Cosa mostra la foto, per chi non la vede.",
+                "properties": {
+                  "de": {
+                    "maxLength": 150,
+                    "minLength": 1,
+                    "pattern": "\\S",
+                    "type": "string"
+                  },
+                  "en": {
+                    "maxLength": 150,
+                    "minLength": 1,
+                    "pattern": "\\S",
+                    "type": "string"
+                  },
+                  "it": {
+                    "maxLength": 150,
+                    "minLength": 1,
+                    "pattern": "\\S",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "it"
+                ],
+                "type": "object"
+              },
+              "media": {
+                "description": "Codice della foto, da carica_media.",
+                "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+                "type": "string",
+                "x-blendo": "media"
+              }
+            },
+            "required": [
+              "media",
+              "alt"
+            ],
+            "type": "object"
           },
           "metri_quadri": {
             "description": "Superficie in metri quadri.",
@@ -230,9 +269,48 @@
         "additionalProperties": false,
         "properties": {
           "foto": {
-            "description": "Percorso della foto, per esempio /foto/camera-doppia.jpg.",
-            "pattern": "^\\/foto\\/[a-z0-9-]+\\.(jpg|png|webp|svg)$",
-            "type": "string"
+            "additionalProperties": false,
+            "properties": {
+              "alt": {
+                "additionalProperties": false,
+                "description": "Cosa mostra la foto, per chi non la vede.",
+                "properties": {
+                  "de": {
+                    "maxLength": 150,
+                    "minLength": 1,
+                    "pattern": "\\S",
+                    "type": "string"
+                  },
+                  "en": {
+                    "maxLength": 150,
+                    "minLength": 1,
+                    "pattern": "\\S",
+                    "type": "string"
+                  },
+                  "it": {
+                    "maxLength": 150,
+                    "minLength": 1,
+                    "pattern": "\\S",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "it"
+                ],
+                "type": "object"
+              },
+              "media": {
+                "description": "Codice della foto, da carica_media.",
+                "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+                "type": "string",
+                "x-blendo": "media"
+              }
+            },
+            "required": [
+              "media",
+              "alt"
+            ],
+            "type": "object"
           },
           "testo": {
             "additionalProperties": false,

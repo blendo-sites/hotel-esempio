@@ -25,8 +25,9 @@ export const blendoYml = z.strictObject({
   schema: z.literal("schema.json"),
   lingue: z.array(z.enum(LINGUE)).min(1),
   media: z.strictObject({
-    formati: z.array(z.enum(["jpg", "png", "webp"])).min(1),
+    formati: z.array(z.enum(["jpg", "png", "webp", "heic"])).min(1),
     max_mb: z.number().positive().max(50),
+    cartella: z.string().regex(/^[a-z0-9_-]+(\/[a-z0-9_-]+)*$/, "cartella relativa alla radice del sito, senza / finale"),
   }),
   livelli: z.strictObject({
     contenuti: z.strictObject({

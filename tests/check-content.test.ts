@@ -146,6 +146,20 @@ describe("check-content", () => {
     assert.ok(messaggi().some((e) => e.startsWith("blendo.yml: media.cartella")));
   });
 
+  test("accepts blendo.yml without limits, rejects limits out of range", () => {
+    modificaBlendoYml(sito, (config) => {
+      delete config.limiti;
+    });
+    assert.deepEqual(messaggi(), []);
+    modificaBlendoYml(sito, (config) => {
+      config.limiti = { proposte_al_giorno: 0, foto_al_giorno: 501 };
+    });
+    const errori = messaggi();
+    assert.equal(errori.length, 2);
+    assert.ok(errori.some((e) => e.includes("limiti.proposte_al_giorno")));
+    assert.ok(errori.some((e) => e.includes("limiti.foto_al_giorno")));
+  });
+
   test("rejects an invalid blendo.yml", () => {
     modificaBlendoYml(sito, (config) => {
       config.controlli.peso_pagina_kb = "tanto";

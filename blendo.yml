@@ -25,6 +25,12 @@ livelli:
 controlli:
   peso_pagina_kb: 600
 
+# Al giorno (ora italiana): ogni proposta costa una verifica e una build della
+# preview. Se la sezione manca valgono 30 e 50; il massimo è 500.
+limiti:
+  proposte_al_giorno: 30
+  foto_al_giorno: 50
+
 # Mappa delle pagine per l'assistente: ogni sezione indica il file
 # (o il gruppo di file) da modificare, con un nome comprensibile.
 pagine:

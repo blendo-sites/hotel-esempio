@@ -6,6 +6,7 @@ import { LINGUE } from "../../src/schemas/comuni.ts";
 const id = z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, "usa solo lettere minuscole, numeri e trattini");
 const nome = z.string().regex(/\S/).max(120);
 const percorsoFile = z.string().regex(/^[^/].*[^/]$|^\*\*$/, "percorso relativo alla radice del sito");
+const limiteGiornaliero = z.int().min(1).max(500);
 
 const sezione = z.strictObject({
   id,
@@ -42,6 +43,13 @@ export const blendoYml = z.strictObject({
   controlli: z.strictObject({
     peso_pagina_kb: z.int().positive().max(10000),
   }),
+  // Optional: without it the gateway uses 30 and 50.
+  limiti: z
+    .strictObject({
+      proposte_al_giorno: limiteGiornaliero.optional(),
+      foto_al_giorno: limiteGiornaliero.optional(),
+    })
+    .optional(),
   pagine: z.array(pagina).min(1),
 });
 
